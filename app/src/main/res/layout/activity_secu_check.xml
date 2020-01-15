@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    tools:context=".SecuCheckActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/i05_back_note" />
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="98px"
+        android:layout_marginStart="800px"
+        android:textColor="#FCA000"
+        android:textSize="60px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textViewDeptName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58px"
+        android:layout_marginStart="800px"
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold"
+        android:textSize="38px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radiog1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1480px"
+        android:layout_marginTop="340px">
+        <RadioButton
+            android:id="@+id/radioButton11"
+            android:tag="1"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+
+        <Space
+            android:layout_width="120px"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radioButton12"
+            android:tag="2"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radiog2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1480px"
+        android:layout_marginTop="455px">
+        <RadioButton
+            android:id="@+id/radioButton21"
+            android:tag="1"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+        <Space
+            android:layout_width="120px"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radioButton22"
+            android:tag="2"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radiog3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1480px"
+        android:layout_marginTop="520px">
+        <RadioButton
+            android:id="@+id/radioButton31"
+            android:tag="1"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+        <Space
+            android:layout_width="120px"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radioButton32"
+            android:tag="2"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radiog4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1480px"
+        android:layout_marginTop="640px">
+        <RadioButton
+            android:id="@+id/radioButton41"
+            android:tag="1"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+        <Space
+            android:layout_width="120px"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radioButton42"
+            android:tag="2"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+    </RadioGroup>
+    <RadioGroup
+        android:id="@+id/radiog5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1480px"
+        android:layout_marginTop="760px">
+        <RadioButton
+            android:id="@+id/radioButton51"
+            android:tag="1"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+        <Space
+            android:layout_width="120px"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radioButton52"
+            android:tag="2"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:button="@null"
+            android:onClick="onNMVBtnClicked"
+            android:background="?android:attr/listChoiceIndicatorMultiple" />
+        <!--                style="@android:style/Widget.CompoundButton.CheckBox"-->
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="1500px"
+        android:layout_height="65px"
+        android:layout_marginTop="840px"
+        android:layout_marginStart="310px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/txtCheckNote"
+            android:textSize="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8px"
+            android:layout_marginStart="10px" />
+        <Button
+            android:id="@+id/buttonnote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:onClick="onButtonNoteClicked" />
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/imageButtonCommit"
+        android:layout_width="410px"
+        android:layout_height="83px"
+        android:adjustViewBounds="true"
+        android:background="#00FFFFFF"
+        android:padding="0px"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/btn_commit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50px"
+        android:onClick="onButtonCommitClicked" />
+
+    <FrameLayout
+        android:id="@+id/compframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#A0000000">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="1386px"
+            android:layout_height="550px"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/i06_pop" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

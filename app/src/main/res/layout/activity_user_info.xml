@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    tools:context=".UserInfoActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/i03_back" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131px"
+        android:layout_marginTop="640px"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textNo1"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo2"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo3"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo4"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo5"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo6"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo7"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+        <Space
+            android:layout_width="14px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textNo8"
+            android:layout_width="118px"
+            android:layout_height="168px"
+            android:textSize="130px"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1254px"
+        android:layout_marginTop="234px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="1"
+                app:srcCompat="@drawable/i03_1"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="2"
+                app:srcCompat="@drawable/i03_2"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="3"
+                app:srcCompat="@drawable/i03_3"
+                android:onClick="onButtonNoClicked" />
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="4"
+                app:srcCompat="@drawable/i03_4"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="5"
+                app:srcCompat="@drawable/i03_5"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="6"
+                app:srcCompat="@drawable/i03_6"
+                android:onClick="onButtonNoClicked" />
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="7"
+                app:srcCompat="@drawable/i03_7"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="8"
+                app:srcCompat="@drawable/i03_8"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="9"
+                app:srcCompat="@drawable/i03_9"
+                android:onClick="onButtonNoClicked" />
+        </TableRow>
+
+        <TableRow>
+            <Space
+                android:layout_width="10px"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/imageButton0"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="0"
+                app:srcCompat="@drawable/i03_0"
+                android:onClick="onButtonNoClicked" />
+            <ImageButton
+                android:id="@+id/imageButtonDel"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                android:tag="X"
+                app:srcCompat="@drawable/i03_del"
+                android:onClick="onButtonNoClicked" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/imageButtonCommit"
+        android:layout_width="410px"
+        android:layout_height="83px"
+        android:adjustViewBounds="true"
+        android:background="#00FFFFFF"
+        android:padding="0px"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/btn_commit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="450px"
+        android:layout_marginBottom="130px"
+        android:onClick="onButtonCommitClicked" />
+</androidx.constraintlayout.widget.ConstraintLayout>

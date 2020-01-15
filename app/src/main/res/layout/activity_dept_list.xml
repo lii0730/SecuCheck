@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    tools:context=".DeptListActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/i04_back" />
+
+    <LinearLayout
+        android:id="@+id/listLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="200px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+<!--        <FrameLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageButton-->
+<!--                android:layout_width="1278px"-->
+<!--                android:layout_height="203px"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:background="#00FFFFFF"-->
+<!--                android:padding="0px"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                app:srcCompat="@drawable/i04_btndept" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="가나다라마바사"-->
+<!--                android:textColor="#FFFFFFFF"-->
+<!--                android:textSize="100px"-->
+<!--                android:layout_gravity="center" />-->
+<!--        </FrameLayout>-->
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
