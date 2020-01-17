@@ -16,39 +16,67 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/i02_back" />
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120px"
+        android:layout_marginTop="360px"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+        <TableRow>
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="830px"
+                android:layout_height="430px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/i02_btnuser1"
+                android:onClick="onButtonUser1Clicked" />
 
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="434px"
-            android:adjustViewBounds="true"
-            android:background="#00FFFFFF"
-            android:padding="0px"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/i02_btnuser1"
-            android:onClick="onButtonUser1Clicked" />
+            <Space
+                android:layout_width="30px"
+                android:layout_height="wrap_content" />
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="830px"
+                android:layout_height="430px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/i02_btnuser2"
+                android:onClick="onButtonUser2Clicked" />
+        </TableRow>
+        <TableRow>
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="830px"
+                android:layout_height="272px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/i02_btnuser3"
+                android:onClick="onButtonUser3Clicked" />
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="434px"
-            android:adjustViewBounds="true"
-            android:background="#00FFFFFF"
-            android:padding="0px"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/i02_btnuser2"
-            android:onClick="onButtonUser2Clicked" />
-    </LinearLayout>
+            <Space
+                android:layout_width="30px"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="830px"
+                android:layout_height="272px"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:padding="0px"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/i02_btnuser3"
+                android:onClick="onButtonUser4Clicked" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,7 @@ public class Common
 
     // 보안점검에 필요한 데이터
     public static byte UserType = Common.USERTYPE_NONE;     // 사용자 타입
+    public static boolean CheckOrList = true;               // true : 보안점검, flase : 목록확인
     public static OBJMSG_1106_USERINFORES User = null;      // 사용자 정보
     public static OBJ_DEPART CurrDept = null;               // 점검중인 부서
 

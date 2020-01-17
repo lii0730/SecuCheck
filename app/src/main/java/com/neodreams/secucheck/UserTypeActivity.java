@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 public class UserTypeActivity extends BaseActivity  // AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -17,6 +16,7 @@ public class UserTypeActivity extends BaseActivity  // AppCompatActivity
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_user_type);
         Common.CurrAct = this;
+        Common.CheckOrList = true;
 
         // 홈버튼 추가
         Common.addHomeBtn(this);
@@ -30,11 +30,25 @@ public class UserTypeActivity extends BaseActivity  // AppCompatActivity
         Common.UserType = Common.USERTYPE_LAST;
         this.goNext();
     }
+    // 최종퇴사자 이력
+    public void onButtonUser3Clicked(View v)
+    {
+        Common.UserType = Common.USERTYPE_LAST;
+        Common.CheckOrList = false;
+        this.goNext();
+    }
 
     // 당직자
     public void onButtonUser2Clicked(View v)
     {
         Common.UserType = Common.USERTYPE_DUTY;
+        this.goNext();
+    }
+    // 당직자 이력
+    public void onButtonUser4Clicked(View v)
+    {
+        Common.UserType = Common.USERTYPE_DUTY;
+        Common.CheckOrList = false;
         this.goNext();
     }
 

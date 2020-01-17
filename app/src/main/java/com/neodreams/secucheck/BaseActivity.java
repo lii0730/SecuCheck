@@ -73,6 +73,7 @@ public class BaseActivity extends AppCompatActivity
         super.onTouchEvent(event);
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
+            Common.CurrAct = this;
             Log.d("TouchEvent", "scroll action");
             resetTimer();
 

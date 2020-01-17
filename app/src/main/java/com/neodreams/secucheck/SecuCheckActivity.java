@@ -193,7 +193,7 @@ public class SecuCheckActivity extends BaseActivity  // AppCompatActivity
             FrameLayout fl = findViewById(R.id.compframe);
             fl.setVisibility(View.VISIBLE);
 
-            resetTimer(6);
+            resetTimer(2);
         }
         else
         {
