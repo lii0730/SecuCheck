@@ -6,29 +6,101 @@
     android:layout_height="match_parent"
     android:background="#A0000000">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="1386px"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="center">
-
-        <ImageView
-            android:layout_width="1386px"
-            android:layout_height="195px"
-            android:layout_gravity="top"
-            app:srcCompat="@drawable/popupbg_01" />
 
         <FrameLayout
             android:layout_width="1386px"
-            android:layout_height="10px"
-            android:layout_marginTop="195px"
-            android:layout_marginBottom="195px"
+            android:layout_height="195px">
+            <ImageView
+                android:layout_width="1386px"
+                android:layout_height="195px"
+                app:srcCompat="@drawable/popupbg_01" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="제목입니다."
+                android:textColor="#00C5D2"
+                android:textSize="70px"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/popupbg_02">
+            <LinearLayout
+                android:id="@+id/area_contetns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="70px"
+                android:orientation="vertical">
 
-        <ImageView
+                <TextView
+                    android:id="@+id/txt_body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="48px"
+                    android:text="완료되었습니다."/>
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="1386px"
-            android:layout_height="195px"
-            android:layout_gravity="bottom"
-            app:srcCompat="@drawable/popupbg_03" />
-    </FrameLayout>
+            android:layout_height="195px">
+            <ImageView
+                android:layout_width="1386px"
+                android:layout_height="195px"
+                app:srcCompat="@drawable/popupbg_03" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="90px"
+                android:layout_marginTop="40px"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btncc"
+                    android:layout_width="210px"
+                    android:layout_height="83px"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:padding="0px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/popupbtn_02" />
+
+                <ImageButton
+                    android:id="@+id/btnok"
+                    android:layout_width="210px"
+                    android:layout_height="83px"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:padding="0px"
+                    android:layout_marginStart="20px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/popupbtn_01" />
+
+                <ImageButton
+                    android:id="@+id/btnre"
+                    android:layout_width="210px"
+                    android:layout_height="83px"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:padding="0px"
+                    android:layout_marginStart="20px"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/popupbtn_03" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 </FrameLayout>

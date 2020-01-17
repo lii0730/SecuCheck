@@ -1,9 +1,13 @@
 package com.neodreams.secucheck;
 
 import android.app.Activity;
+import android.opengl.Visibility;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -202,5 +206,37 @@ public class Common
         newUiOptions |= View.SYSTEM_UI_FLAG_FULLSCREEN;
         newUiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         view.setSystemUiVisibility(newUiOptions);
+    }
+
+    // alert
+    public static PopupWindow cPopupWin;
+    public static void showAlert(Activity act, String title, String body, View.OnClickListener clcc, View.OnClickListener clok, View.OnClickListener clre)
+    {
+        View pop = act.getLayoutInflater().inflate(R.layout.popupactivity_alert, null);
+        Common.cPopupWin = new PopupWindow(pop, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        Common.cPopupWin.setFocusable(true);
+        Common.cPopupWin.showAtLocation(pop, Gravity.CENTER, 0, 0);
+
+        TextView txttitle = pop.findViewById(R.id.txt_title);
+        txttitle.setText(title);
+        TextView txtbody = pop.findViewById(R.id.txt_body);
+        txtbody.setText(body);
+
+        ImageButton btncc = pop.findViewById(R.id.btncc);
+        ImageButton btnok = pop.findViewById(R.id.btnok);
+        ImageButton btnre = pop.findViewById(R.id.btnre);
+
+        if(clcc == null)
+            btncc.setVisibility(View.GONE);
+        else
+            btncc.setOnClickListener(clcc);
+        if(clok == null)
+            btnok.setVisibility(View.GONE);
+        else
+            btnok.setOnClickListener(clok);
+        if(clre == null)
+            btnre.setVisibility(View.GONE);
+        else
+            btnre.setOnClickListener(clre);
     }
 }

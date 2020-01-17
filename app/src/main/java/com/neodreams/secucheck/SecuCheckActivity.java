@@ -120,7 +120,19 @@ public class SecuCheckActivity extends BaseActivity  // AppCompatActivity
             }
             else
             {
-                Toast.makeText(this, "모든 항목을 확인해 주세요!!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "모든 항목을 확인해 주세요!!", Toast.LENGTH_LONG).show();
+                View.OnClickListener clnone = new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        if(Common.cPopupWin != null)
+                            Common.cPopupWin.dismiss();
+
+                        Common.setFullScreen(getWindow().getDecorView());
+                    }
+                };
+                Common.showAlert(this, "알림", "모든 항목을 확인해 주세요!!", null, clnone, null);
                 check = false;
                 break;
             }

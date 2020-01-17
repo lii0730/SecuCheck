@@ -1,23 +1,15 @@
 package com.neodreams.secucheck;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ScrollView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,24 +29,19 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static android.util.TypedValue.COMPLEX_UNIT_PX;
-
 public class UserInfoActivity extends BaseActivity  // AppCompatActivity
 {
     TextView[] TxtView;
     char[] empno = new char[8];
     byte currIndex = 0;
 
-    //////////////////////////////////////////////////////////////////////// USB
+    private PopupWindow mPopWin;
 
+    //////////////////////////////////////////////////////////////////////// USB
     private UsbManager mUsbManager;
     private UsbSerialPort mSerialPort;
 
     public static final String INTENT_ACTION_GRANT_USB = BuildConfig.APPLICATION_ID + ".GRANT_USB";
-
-
-
-
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
@@ -79,6 +66,32 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
                     });
                 }
             };
+    //-----//////////////////////////////////////////////////////////////////////
+
+
+    //////////////////////////////////////////////////////////////////////// Alert
+    View.OnClickListener clnone = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            if(Common.cPopupWin != null)
+                Common.cPopupWin.dismiss();
+
+            Common.setFullScreen(getWindow().getDecorView());
+        }
+    };
+    View.OnClickListener clclose = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            if(Common.cPopupWin != null)
+                Common.cPopupWin.dismiss();
+
+            finish();
+        }
+    };
     //-----//////////////////////////////////////////////////////////////////////
 
     @Override
@@ -223,20 +236,7 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
     {
         if (currIndex < 8)
         {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("알림");
-            alert.setMessage("사원증을 태깅하거나 사번을 입력해 주세요!!.");
-
-            alert.setPositiveButton("확인", new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                    Common.setFullScreen(getWindow().getDecorView());
-                }
-            });
-
-            alert.show();
+            Common.showAlert(this, "알림", "사원증을 태깅하거나, 사번을 입력해 주세요!!", null, clnone, null);
         }
         else
         {
@@ -263,18 +263,7 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
         {
             if(code == Common.CODE_ERROR)
             {
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setTitle("오류");
-                alert.setMessage("사원정보 조회중 오류가 발생 했습니다.");
-                alert.setPositiveButton("확인", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    { finish();
-                    }
-                });
-
-                alert.show();
+                Common.showAlert(this, "오류", "사원정보 조회중 오류가 발생 했습니다.", null, clclose, null);
             }
             else
             {
@@ -293,40 +282,27 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
                         }
                         else
                         {
-                            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                            alert.setTitle("확인");
-                            alert.setMessage("'" + Common.CurrDept.DepartName + "'는 이미 보안점검을 실행했습니다.\r\n다시 하시겠습니까?");
-
                             SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String txt = "       점검시간 : " + dateF.format(data.CheckTime);
-                            txt += "\r\n       점 검 자 : ";
-                            txt += data.UserName;
+                            String body = "'" + Common.CurrDept.DepartName + "'는 이미 보안점검을 실행했습니다.\r\n다시 하시겠습니까?\n\n"
+                                    + "       점검시간 : " + dateF.format(data.CheckTime)
+                                    + "\r\n       점 검 자 : "
+                                    + data.UserName;
 
-                            final TextView tv = new TextView(this);
-                            tv.setTextSize(COMPLEX_UNIT_PX, 28);
-                            tv.setText(txt);
-                            alert.setView(tv);
-
-                            alert.setPositiveButton("재 실시", new DialogInterface.OnClickListener()
+                            View.OnClickListener clre = new View.OnClickListener()
                             {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i)
+                                public void onClick(View v)
                                 {
+                                    if(Common.cPopupWin != null)
+                                        Common.cPopupWin.dismiss();
+
                                     Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
-                            });
-                            alert.setNegativeButton("취소", new DialogInterface.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i)
-                                {
-                                    finish();
-                                }
-                            });
+                            };
 
-                            alert.show();
+                            Common.showAlert(this, "보안점검 재실시 확인", body, clclose, null, clre);
                         }
                     }
                     else if (Common.UserType == Common.USERTYPE_DUTY)
@@ -338,34 +314,11 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
                 }
                 else if(code == Common.CODE_USERINFO_NOTFOUND)
                 {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                    alert.setTitle("오류");
-                    alert.setMessage("사원정보를 찾을 수 없습니다. 다시 시도해 주세요.");
-                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i)
-                        {
-                            Common.setFullScreen(getWindow().getDecorView());
-                        }
-                    });
-
-                    alert.show();
+                    Common.showAlert(this, "오류", "사원정보를 찾을 수 없습니다. 다시 시도해 주세요.", null, clnone, null);
                 }
                 else if(code == Common.CODE_USERINFO_NOMATCHDEPT)
                 {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                    alert.setTitle("오류");
-                    alert.setMessage("해당 단말에 등록된 부서의 사원이 아닙니다.");
-                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i)
-                        { finish();
-                        }
-                    });
-
-                    alert.show();
+                    Common.showAlert(this, "오류", "해당 단말에 등록된 부서의 사원이 아닙니다.", null, clclose, null);
                 }
             }
         }
@@ -452,12 +405,6 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
                 TxtView[i].setText("");
         }
     }
-
-
-
-
-
-
 
     // USB 초기화
     private void initUSB()
