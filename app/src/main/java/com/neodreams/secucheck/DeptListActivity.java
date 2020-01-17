@@ -1,8 +1,5 @@
 package com.neodreams.secucheck;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,6 +15,10 @@ import com.neodreams.secucheck.OBJMSGS.OBJ_DEPART;
 public class DeptListActivity extends BaseActivity  // AppCompatActivity
 {
     LinearLayout LL;
+    final int bpp = 4;
+    int currPage = 1;
+    int totPage = 1;
+    ImageButton BtnPrev, BtnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,11 +35,72 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
         // 오늘 날짜 추가
         Common.addDateStr(this);
 
-        if (Common.DeviceInfo != null && Common.DeviceInfo.Departs.size() > 0)
+        BtnPrev = findViewById(R.id.btnprev);
+        BtnNext = findViewById(R.id.btnnext);
+
+        totPage = (int)Math.ceil(Common.DeviceInfo.Departs.size() / (double)bpp);
+
+        if(totPage < 2)
         {
-            for (OBJ_DEPART dept : Common.DeviceInfo.Departs)
+            BtnPrev.setVisibility(View.GONE);
+            BtnNext.setVisibility(View.GONE);
+        }
+
+        if (Common.DeviceInfo.Departs != null && Common.DeviceInfo.Departs.size() > 0)
+            ShowPage(currPage);
+
+//        if (Common.DeviceInfo != null && Common.DeviceInfo.Departs.size() > 0)
+//        {
+//            for (OBJ_DEPART dept : Common.DeviceInfo.Departs)
+//                this.addDeptBtn(dept);
+//        }
+    }
+
+    private void ShowPage(int page)
+    {
+        this.LL.removeAllViews();
+
+        BtnPrev.setAlpha(1F);
+        BtnNext.setAlpha(1F);
+
+        if(page < 2)
+            BtnPrev.setAlpha(0.3F);
+        else if(page >= totPage)
+            BtnNext.setAlpha(0.3F);
+
+        int si = bpp * (page - 1);
+        int ei = si + bpp;
+
+        if(ei > Common.DeviceInfo.Departs.size())
+            ei = Common.DeviceInfo.Departs.size();
+
+        for(int i=si; i<ei; i++)
+        {
+            OBJ_DEPART dept = Common.DeviceInfo.Departs.get(i);
+
+            if(dept != null)
                 this.addDeptBtn(dept);
         }
+    }
+
+    public void onPrevClicked(View v)
+    {
+        currPage--;
+
+        if(currPage < 1)
+            currPage = 1;
+
+        ShowPage(currPage);
+    }
+
+    public void onNextClicked(View v)
+    {
+        currPage++;
+
+        if(currPage > totPage)
+            currPage = totPage;
+
+        ShowPage(currPage);
     }
 
     private ImageButton addDeptBtn(OBJ_DEPART dept)
@@ -50,7 +112,6 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
         ImageButton ib = new ImageButton(this);
         ib.setImageResource(R.drawable.i04_btndept);
         ib.setBackgroundColor(0x00000000);
-//        ib.setTag(dept.DepartCode);
         ib.setTag(dept);
 
         TextView tv = new TextView(this);
