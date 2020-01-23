@@ -41,4 +41,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Button" />
+
+    <FrameLayout
+        android:id="@+id/blackframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#000000" />
 </androidx.constraintlayout.widget.ConstraintLayout>

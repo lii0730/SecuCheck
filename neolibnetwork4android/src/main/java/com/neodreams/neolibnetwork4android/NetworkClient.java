@@ -50,6 +50,18 @@ public class NetworkClient extends Thread
         rcvs = new ArrayList<INetMessageRcv>();
     }
 
+    public boolean getConnected()
+    {
+        boolean rVal = false;
+
+        if(socket != null)
+        {
+            rVal = socket.isConnected() && !socket.isClosed();
+        }
+
+        return  rVal;
+    }
+
     public void Reset()
     {
         socket = new Socket();

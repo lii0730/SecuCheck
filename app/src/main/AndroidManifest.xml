@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.usb.host" />
 
     <application
@@ -16,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SecuCheckListActivity"></activity>
 
         <receiver
             android:name=".BootCompletedRCV"
@@ -47,19 +49,29 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
                 android:resource="@xml/device_filter" />
         </activity>
-        <activity android:name=".ConfigActivity" android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".UserTypeActivity" android:screenOrientation="landscape" />
-        <activity android:name=".UserInfoActivity" android:screenOrientation="landscape" />
-        <activity android:name=".DeptListActivity" android:screenOrientation="landscape" />
-        <activity android:name=".SecuCheckActivity" android:screenOrientation="landscape" />
+        <activity
+            android:name=".ConfigActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".UserTypeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".DeptListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SecuCheckActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

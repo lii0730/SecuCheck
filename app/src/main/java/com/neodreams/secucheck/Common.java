@@ -1,7 +1,6 @@
 package com.neodreams.secucheck;
 
 import android.app.Activity;
-import android.opengl.Visibility;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.neodreams.neolibnetwork4android.OBJMSG;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1102_DEVICEINFORES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1106_USERINFORES;
+import com.neodreams.secucheck.OBJMSGS.OBJMSG_1202_CHECKLISTRES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_FF00_DEVICESTATUS;
 import com.neodreams.secucheck.OBJMSGS.OBJ_CHECKDATA;
 import com.neodreams.secucheck.OBJMSGS.OBJ_DEPART;
@@ -58,6 +58,9 @@ public class Common
 
     // 금일 최종퇴사자 보안점검 목록
     public static HashMap<String, OBJ_CHECKDATA> CheckDataByLast;
+
+    // 보안점검 이력
+    public static OBJMSG_1202_CHECKLISTRES CheckData4List;
 
     // 첫화면
     public static MainActivity MainAct;

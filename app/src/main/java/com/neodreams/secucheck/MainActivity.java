@@ -2,56 +2,29 @@ package com.neodreams.secucheck;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
 import android.app.KeyguardManager;
-import android.app.PendingIntent;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.TwoLineListItem;
 
-import com.hoho.android.usbserial.driver.UsbSerialDriver;
-import com.hoho.android.usbserial.driver.UsbSerialPort;
-import com.hoho.android.usbserial.driver.UsbSerialProber;
-import com.neodreams.neolibnetwork4android.INetMessageRcv;
-import com.neodreams.neolibnetwork4android.NetCommon;
-import com.neodreams.neolibnetwork4android.NetworkClient;
-import com.neodreams.neolibnetwork4android.OBJMSGHeader;
 import com.neodreams.secucheck.OBJMSGS.NetMSGS;
-import com.neodreams.secucheck.OBJMSGS.OBJMSG_1101_DEVICEINFOREQ;
-import com.neodreams.secucheck.OBJMSGS.OBJMSG_1102_DEVICEINFORES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1205_TODAYCHECKLISTREQ;
-import com.neodreams.secucheck.OBJMSGS.OBJMSG_F002_HOLIDAYLIST;
-import com.neodreams.secucheck.OBJMSGS.OBJMSG_FF00_DEVICESTATUS;
-import com.neodreams.secucheck.OBJMSGS.OBJ_CHECKDATA;
-import com.neodreams.secucheck.OBJMSGS.OBJ_DEPART;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,11 +33,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -120,6 +90,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences SP = getSharedPreferences("config", MODE_PRIVATE);
         ConfigActivity.SERVERIP = SP.getString("SERVER_IP", "");
         ConfigActivity.SERVERPORT = SP.getInt("SERVER_PORT", 19801);
+        ConfigActivity.HTTPPORT = SP.getString("HTTPPORT", "8880");
 
         // 디바이스 메니저 초기화 및 관리자 권한 확인
         devicePolicyManager = (DevicePolicyManager) getApplicationContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -146,8 +117,11 @@ public class MainActivity extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
+        turnonScreen();
         Common.setFullScreen(getWindow().getDecorView());
         Common.ResetCommon();
+
+        Common.netmng.CheckClient();
     }
 
     @Override
@@ -155,6 +129,45 @@ public class MainActivity extends AppCompatActivity
     {
         timer.cancel();
         super.onDestroy();
+    }
+
+    // 화면 켜기
+    private void turnonScreen()
+    {
+        // 화면 켜기
+        Window win = getWindow();
+        KeyguardManager kg = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        if(kg != null)
+        {
+            win.addFlags(WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
+
+            if (Build.VERSION.SDK_INT >= 27)
+            {
+                this.setShowWhenLocked(true);
+                this.setTurnScreenOn(true);
+                kg.requestDismissKeyguard(this, null);
+            }
+            else if (Build.VERSION.SDK_INT == 26)
+            {
+                win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+                win.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                kg.requestDismissKeyguard(this, null);
+            }
+            else
+            {
+                PowerManager pm = (PowerManager)getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "onofftest:waketag");
+                wl.acquire();
+
+                win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+                win.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+                win.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+                wl.release();
+            }
+        }
+
+        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     // Timer.
@@ -198,57 +211,15 @@ public class MainActivity extends AppCompatActivity
     // on=true : 단말 화면 켜기, on=false : 단말 화면 끄기
     public void ScreenCtrl(boolean on)
     {
-        Window win = getWindow();
+        FrameLayout fl = findViewById(R.id.blackframe);
 
         if(on)
-        {
-            // 화면 켜기
-            //if(!isOn)
-            {
-                KeyguardManager kg = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-                if(kg != null)
-                {
-                    win.addFlags(WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
-
-                    if (Build.VERSION.SDK_INT >= 27)
-                    {
-                        this.setShowWhenLocked(true);
-                        this.setTurnScreenOn(true);
-                        kg.requestDismissKeyguard(this, null);
-                    }
-                    else if (Build.VERSION.SDK_INT == 26)
-                    {
-                        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-                        win.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-                        kg.requestDismissKeyguard(this, null);
-                    }
-                    else
-                    {
-                        PowerManager pm = (PowerManager)getSystemService(POWER_SERVICE);
-                        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "onofftest:waketag");
-                        wl.acquire();
-
-                        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-                        win.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-                        win.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
-                        wl.release();
-                    }
-                }
-                win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        }
+            fl.setVisibility(View.GONE);
         else
-        {
-            // 화면 끄기
-            //if (isOn && Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
-            {
-                devicePolicyManager.lockNow();
-            }
-        }
+            fl.setVisibility(View.VISIBLE);
 
         isOn = on;
+        Common.setFullScreen(getWindow().getDecorView());
     }
 
     // 설정 버튼 클릭
@@ -298,7 +269,7 @@ public class MainActivity extends AppCompatActivity
             {
                 try
                 {
-                    String path = "http://" + ConfigActivity.SERVERIP + ":8980/contentsFile/ORGCHART/";
+                    String path = "http://" + ConfigActivity.SERVERIP + ":" + ConfigActivity.HTTPPORT + "/contentsFile/ORGCHART/";
                     path += String.valueOf(Common.DeviceInfo.DeviceSeq);
 
                     URL url = new URL(path);

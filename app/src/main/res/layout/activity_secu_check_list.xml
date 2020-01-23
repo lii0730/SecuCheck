@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    tools:context=".SecuCheckListActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Backgroud image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/i07_back" />
+
+    <TextView
+        android:id="@+id/textViewDeptName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:layout_marginStart="504px"
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold"
+        android:textSize="48px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:layout_width="1721px"
+        android:layout_height="684px"
+        android:layout_marginTop="230px"
+        android:background="@drawable/i07_contentsback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TableLayout
+            android:id="@+id/listctrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="115px">
+<!--            <TableRow>-->
+<!--                <TextView android:text="testtest"-->
+<!--                    android:layout_height="114px"-->
+<!--                    android:layout_width="220px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="365px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="168px"/>-->
+
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--                <TextView android:text="test"-->
+<!--                    android:layout_width="97px"/>-->
+<!--            </TableRow>-->
+        </TableLayout>
+        <TextView
+            android:id="@+id/txtnolist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="80px"
+            android:textStyle="bold"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            android:text=" 해당 부서의 보안점검 이력이 없습니다. "/>
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btnback"
+        android:contentDescription="Back"
+        android:layout_width="410px"
+        android:layout_height="83px"
+        android:layout_marginBottom="30px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:adjustViewBounds="true"
+        android:background="#00000000"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/i07_btnback"
+        android:onClick="onBackClicked" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

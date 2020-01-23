@@ -29,6 +29,10 @@ public class BaseActivity extends AppCompatActivity
             {
                 RCV(msg.what, msg.arg1);
             }
+            else if (msg.what == NetMSGS.OP1202_CHECKLISTRES)
+            {
+                RCV(msg.what, 0);
+            }
         }
     };
 
@@ -84,10 +88,9 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     protected void onStart() {
-
+        Common.netmng.CheckClient();
         handlerDelayStart(MESSAGE_WHAT_TIMER, LIMIT_TIME);
         super.onStart();
-
     }
 
     @Override

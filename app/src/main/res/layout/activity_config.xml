@@ -41,6 +41,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WEB Port : " />
+        <EditText
+            android:id="@+id/txtWebPort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

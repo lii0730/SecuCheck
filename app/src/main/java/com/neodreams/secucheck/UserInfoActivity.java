@@ -244,6 +244,21 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
         }
     }
 
+    public void goNext()
+    {
+        if(Common.CheckOrList)
+        {
+            Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(getApplicationContext(), SecuCheckListActivity.class);
+            startActivity(intent);
+        }
+        finish();
+    }
+
     // 사원정보 요청 전송
     private void SendUserInfoReq(String data)
     {
@@ -277,32 +292,36 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
 
                         if (data == null)
                         {
-                            Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
-                            startActivity(intent);
+                            goNext();
                         }
                         else
                         {
-                            SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String body = "'" + Common.CurrDept.DepartName + "'는 이미 보안점검을 실행했습니다.\r\n다시 하시겠습니까?\n\n"
-                                    + "       점검시간 : " + dateF.format(data.CheckTime)
-                                    + "\r\n       점 검 자 : "
-                                    + data.UserName;
-
-                            View.OnClickListener clre = new View.OnClickListener()
+                            if(Common.CheckOrList)
                             {
-                                @Override
-                                public void onClick(View v)
+                                SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                String body = "'" + Common.CurrDept.DepartName + "'는 이미 보안점검을 실행했습니다.\r\n다시 하시겠습니까?\n\n"
+                                        + "       점검시간 : " + dateF.format(data.CheckTime)
+                                        + "\r\n       점 검 자 : "
+                                        + data.UserName;
+
+                                View.OnClickListener clre = new View.OnClickListener()
                                 {
-                                    if(Common.cPopupWin != null)
-                                        Common.cPopupWin.dismiss();
+                                    @Override
+                                    public void onClick(View v)
+                                    {
+                                        if(Common.cPopupWin != null)
+                                            Common.cPopupWin.dismiss();
 
-                                    Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            };
+                                        goNext();
+                                    }
+                                };
 
-                            Common.showAlert(this, "보안점검 재실시 확인", body, clclose, null, clre);
+                                Common.showAlert(this, "보안점검 재실시 확인", body, clclose, null, clre);
+                            }
+                            else
+                            {
+                                goNext();
+                            }
                         }
                     }
                     else if (Common.UserType == Common.USERTYPE_DUTY)

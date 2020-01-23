@@ -12,7 +12,7 @@ import com.neodreams.secucheck.OBJMSGS.OBJMSG_1101_DEVICEINFOREQ;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1102_DEVICEINFORES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1103_DEVICEONTIMECHANGE;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1106_USERINFORES;
-import com.neodreams.secucheck.OBJMSGS.OBJMSG_1205_TODAYCHECKLISTREQ;
+import com.neodreams.secucheck.OBJMSGS.OBJMSG_1202_CHECKLISTRES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1206_TODAYCHECKLISTRES;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_1301_IMGCHANGEEVT;
 import com.neodreams.secucheck.OBJMSGS.OBJMSG_F002_HOLIDAYLIST;
@@ -29,10 +29,27 @@ public class NetMNG implements INetMessageRcv
 
     public void Init()
     {
+        if(Client != null)
+        {
+            Client.Close();
+            Client = null;
+        }
+
         // 통신 초기화
         Client = new NetworkClient(ConfigActivity.SERVERIP, ConfigActivity.SERVERPORT);
         Client.AddHandler(this);
         Client.start();
+    }
+
+    public void CheckClient()
+    {
+        Thread.State ts = Client.getState();
+
+        if(ts != Thread.State.RUNNABLE && ts != Thread.State.TIMED_WAITING)
+            Init();
+
+        if(!Client.getConnected())
+            Init();
     }
 
     @Override
@@ -47,7 +64,7 @@ public class NetMNG implements INetMessageRcv
     @Override
     public void NetDisconnected()
     {
-
+        Init();
     }
 
     @Override
@@ -106,6 +123,14 @@ public class NetMNG implements INetMessageRcv
             // 보안점검 목록 요청 응답
             case NetMSGS.OP1202_CHECKLISTRES:
             {
+                OBJMSG_1202_CHECKLISTRES omsg = new OBJMSG_1202_CHECKLISTRES();
+                if(omsg.Parse(body))
+                {
+                    Common.CheckData4List = omsg;
+
+                    if(Common.CurrAct != null)
+                        Common.CurrAct.RCV2(NetMSGS.OP1202_CHECKLISTRES, 0);
+                }
             }
             break;
             // 금일 보안점검 목록 요청 응답
@@ -192,8 +217,8 @@ public class NetMNG implements INetMessageRcv
                     }
                 }
 
-                    if(Common.CurrAct != null)
-                        Common.CurrAct.RCV2(NetMSGS.OP1106_USERINFORES, code);
+                if(Common.CurrAct != null)
+                    Common.CurrAct.RCV2(NetMSGS.OP1106_USERINFORES, code);
             }
             break;
             // 휴일 정보

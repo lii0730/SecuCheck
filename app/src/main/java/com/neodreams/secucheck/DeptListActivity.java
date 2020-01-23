@@ -118,10 +118,30 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
         tv.setTextSize(100);
         tv.setText(dept.DepartName);
 
-        if (dept.Checked)
+        if (Common.CheckOrList)
         {
-            ib.setAlpha(0.7f);
-            tv.setTextColor(0xFF909090);
+            if (dept.Checked)
+            {
+                ib.setAlpha(0.7f);
+                tv.setTextColor(0xFF909090);
+            }
+            else
+            {
+                ib.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        //String tag = view.getTag().toString();
+                        Common.CurrDept = (OBJ_DEPART) view.getTag();
+
+                        Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                tv.setTextColor(0xFFFFFFFF);
+            }
         }
         else
         {
@@ -133,7 +153,7 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
                     //String tag = view.getTag().toString();
                     Common.CurrDept = (OBJ_DEPART) view.getTag();
 
-                    Intent intent = new Intent(getApplicationContext(), SecuCheckActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SecuCheckListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -155,10 +175,5 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
         this.LL.addView(fl);
 
         return null;
-    }
-
-    // 버튼을 눌렀을 때 처리
-    public void onButtonClicked(View v)
-    {
     }
 }
