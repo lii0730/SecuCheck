@@ -15,7 +15,7 @@ public class UserTypeActivity extends BaseActivity  // AppCompatActivity
         super.onCreate(savedInstanceState);
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_user_type);
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
         Common.CheckOrList = true;
 
         // 홈버튼 추가

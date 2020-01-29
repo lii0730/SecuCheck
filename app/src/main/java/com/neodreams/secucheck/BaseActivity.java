@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +23,7 @@ public class BaseActivity extends AppCompatActivity
             if (msg.what == MESSAGE_WHAT_TIMER)
             {
                 Log.d("MESSAGE_WHAT_TIMER", " : MESSAGE_WHAT_TIMER ");
-                Common.CurrAct = null;
+//                Common.CurrAct = null;
                 finish();
             }
             else if (msg.what == NetMSGS.OP1106_USERINFORES)
@@ -35,6 +36,11 @@ public class BaseActivity extends AppCompatActivity
             }
         }
     };
+
+    public void onHomeClicked(View v)
+    {
+        finish();
+    }
 
     protected void resetTimer()
     {
@@ -77,7 +83,7 @@ public class BaseActivity extends AppCompatActivity
         super.onTouchEvent(event);
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
-            Common.CurrAct = this;
+//            Common.CurrAct = this;
             Log.d("TouchEvent", "scroll action");
             resetTimer();
 
@@ -98,5 +104,12 @@ public class BaseActivity extends AppCompatActivity
         handlerDelayStop(MESSAGE_WHAT_CANCEL);
         super.onStop();
 
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Common.CurrAct = this;
     }
 }

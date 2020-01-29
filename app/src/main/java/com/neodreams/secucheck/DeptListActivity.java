@@ -26,7 +26,7 @@ public class DeptListActivity extends BaseActivity  // AppCompatActivity
         super.onCreate(savedInstanceState);
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_dept_list);
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
 
         this.LL = findViewById(R.id.listLayout);
 

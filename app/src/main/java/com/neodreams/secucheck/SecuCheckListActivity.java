@@ -29,7 +29,7 @@ public class SecuCheckListActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_secu_check_list);
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
 
         // 홈버튼 추가
         Common.addHomeBtn(this);

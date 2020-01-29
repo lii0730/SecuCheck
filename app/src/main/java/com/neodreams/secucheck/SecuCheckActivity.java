@@ -35,7 +35,7 @@ public class SecuCheckActivity extends BaseActivity  // AppCompatActivity
         super.onCreate(savedInstanceState);
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_secu_check);
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
 
         // 홈버튼 추가
         Common.addHomeBtn(this);

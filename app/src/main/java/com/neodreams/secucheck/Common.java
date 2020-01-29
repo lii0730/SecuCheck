@@ -72,7 +72,7 @@ public class Common
     public static void InitCommon()
     {
         Common.DeviceInfo = new OBJMSG_1102_DEVICEINFORES();
-        Common.DeviceInfo.OnTime = 800;
+        Common.DeviceInfo.OnTime = 0;
         Common.DeviceInfo.OffTime = 2359;
 
         Common.CheckDataByLast = new HashMap<String, OBJ_CHECKDATA>();
@@ -183,19 +183,31 @@ public class Common
         ConstraintLayout cl = ac.findViewById(R.id.mainLayout);
         cl.addView(ib);
 
+        Common.CurrAct = (BaseActivity) ac;
+
         ib.setOnClickListener(
-                new View.OnClickListener()
+            new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
                 {
-                    @Override
-                    public void onClick(View v)
+                    if (Common.CurrAct != null)
                     {
-                        if (Common.CurrAct != null)
+                        try
                         {
-                            Common.CurrAct.finish();
-                            Common.CurrAct = null;
+//                            Common.CurrAct.finish();
+
+                            if(Common.CurrAct != null)
+                                Common.CurrAct.RCV2(BaseActivity.MESSAGE_WHAT_TIMER, 0);
                         }
+                        catch(Exception ex)
+                        {
+                            Log.d("addHomeBtn OnClickListener", ex.getMessage());
+                        }
+//                        Common.CurrAct = null;
                     }
                 }
+            }
         );
     }
 

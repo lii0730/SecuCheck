@@ -100,7 +100,7 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
         super.onCreate(savedInstanceState);
         Common.setFullScreen(getWindow().getDecorView());
         setContentView(R.layout.activity_user_info);
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
 
         initUSB();
 
@@ -143,7 +143,7 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        Common.CurrAct = this;
+//        Common.CurrAct = this;
 
         if (Common.SerialPort == null)
         {
