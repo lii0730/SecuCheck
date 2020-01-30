@@ -218,9 +218,33 @@ public class UserInfoActivity extends BaseActivity  // AppCompatActivity
             for(int i=0; i<len; i++)
                 tmp[i] = (char)bf[i];
 
-            String empno = String.valueOf(tmp).trim();
+            String sEmpno = String.valueOf(tmp).trim();
 
-            SendUserInfoReq(empno);
+            try
+            {
+                while (sEmpno.length() < 8)
+                {
+                    sEmpno = "0" + sEmpno;
+                }
+
+                char[] tmpEmpno = sEmpno.toCharArray();
+                int tmpLen = 8 < tmpEmpno.length ? 8 : tmpEmpno.length;
+                currIndex = (byte)tmpLen;
+
+                for (int i = 0; i < tmpLen; i++)
+                {
+                    empno[i] = tmpEmpno[i];
+                }
+
+                ShowEmpno();
+            }
+            catch (Exception ex)
+            {
+                sEmpno = String.valueOf(tmp).trim();
+                Log.d("TAGING - 8자리 만들기 :", ex.getMessage());
+            }
+
+            SendUserInfoReq(sEmpno);
 
             idx = 0;
         }
