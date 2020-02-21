@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SecuCheck</string>
+    <string name="userinfo_txt">사원증을 출입문
+        <font color='#FFD800'>카드리더기에\n태그</font>하거나
+        <font color='#FFD800'>사원번호를\n입력</font>해주세요.
+    </string>
 </resources>

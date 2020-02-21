@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity
         ConfigActivity.SERVERIP = SP.getString("SERVER_IP", "");
         ConfigActivity.SERVERPORT = SP.getInt("SERVER_PORT", 19801);
         ConfigActivity.HTTPPORT = SP.getString("HTTPPORT", "8880");
+        ConfigActivity.SECUCHECKTIME = SP.getInt("SECUCHECKTIME", 1810);
 
         // 디바이스 메니저 초기화 및 관리자 권한 확인
         devicePolicyManager = (DevicePolicyManager) getApplicationContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -194,9 +195,11 @@ public class MainActivity extends AppCompatActivity
 
                 int nowTime = (currH * 100) + currM;
 
+                HomeCtrl(nowTime);
+
                 if(Common.DeviceInfo != null)
                 {
-                    if (nowTime >= Common.DeviceInfo.OnTime && nowTime <= Common.DeviceInfo.OffTime)
+                    if (nowTime >= Common.DeviceInfo.OnTime && nowTime < Common.DeviceInfo.OffTime)
                         ScreenCtrl(true);
                     else
                         ScreenCtrl(false);
@@ -207,6 +210,22 @@ public class MainActivity extends AppCompatActivity
             }
         };
     };
+
+
+
+    public void HomeCtrl(int now)
+    {
+        if(now > ConfigActivity.SECUCHECKTIME && now < Common.DeviceInfo.OffTime)
+        {
+            if(Common.CurrAct == null)
+                onButtonSecucheckClicked(null);
+        }
+        else if(now >= Common.DeviceInfo.OffTime)
+        {
+            if(Common.CurrAct != null)
+                Common.CurrAct.RCV2(BaseActivity.MESSAGE_WHAT_TIMER, 0);
+        }
+    }
 
     // on=true : 단말 화면 켜기, on=false : 단말 화면 끄기
     public void ScreenCtrl(boolean on)

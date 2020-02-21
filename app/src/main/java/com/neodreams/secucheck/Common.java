@@ -22,6 +22,7 @@ import com.neodreams.secucheck.OBJMSGS.OBJ_DEPART;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -144,6 +145,16 @@ public class Common
         String to = transFormat.format(from);
 
         return to;
+    }
+
+    // 현재 시간의 HHmm 형식의 숫자 리턴
+    public static int GetCurrTimeInt()
+    {
+        Calendar now = Calendar.getInstance();
+        int currH = now.get(Calendar.HOUR_OF_DAY);
+        int currM = now.get(Calendar.MINUTE);
+
+        return (currH * 100) + currM;
     }
 
     /////////////////////////////////////// UI

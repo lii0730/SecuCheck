@@ -1,5 +1,6 @@
 package com.neodreams.secucheck;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,6 +17,8 @@ public class BaseActivity extends AppCompatActivity
     public static int MESSAGE_WHAT_CANCEL = 2;
     public static int LIMIT_TIME = 60000;
 
+    public int Flag = 0;
+
     Handler mHandler = new Handler()
     {
         public void handleMessage(Message msg)
@@ -23,8 +26,23 @@ public class BaseActivity extends AppCompatActivity
             if (msg.what == MESSAGE_WHAT_TIMER)
             {
                 Log.d("MESSAGE_WHAT_TIMER", " : MESSAGE_WHAT_TIMER ");
-//                Common.CurrAct = null;
-                finish();
+
+                int now = Common.GetCurrTimeInt();
+
+                if (now > ConfigActivity.SECUCHECKTIME && now < Common.DeviceInfo.OffTime)
+                {
+                    if(Flag != 1)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), UserTypeActivity.class);
+                        startActivity(intent);
+
+                        finish();
+                    }
+                }
+                else
+                {
+                    finish();
+                }
             }
             else if (msg.what == NetMSGS.OP1106_USERINFORES)
             {
